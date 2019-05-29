@@ -240,8 +240,8 @@ def p_update_cols(p):
     """
     p[0] = p[1] + ' ' + p[2] + ' ' + p[3] + p[4]
     if p[2] != '=':
-        # TODO: finish else error
-        print('error')
+        p_error(p)
+        sys.exit()  
     return p
 
 
@@ -254,8 +254,8 @@ def p_update_col(p):
     try:
         p[0] = p[1] + ' ' + p[2] + ' ' + p[3] + ' ' + p[4] + p[5]
         if p[3] != '=':
-            # TODO: finish else error
-            print('error')
+            p_error(p)
+            sys.exit()
     except IndexError:
         p[0] = ''
     return p
@@ -282,7 +282,9 @@ def p_exit_db(p):
 
 
 def p_error(p):
-    if p:
+    if isinstance(p, yacc.YaccProduction):
+        print("Wrong assignment symbol in '%s'" % p[0])
+    elif p:
         print("Syntax error at '%s'" % p.value)
     else:
         print("Syntax error at EOF")
@@ -312,7 +314,7 @@ if __name__ == '__main__':
 
     connect_db()
 
-    in_type = input("""choose where date from:\n1. file\n2. terminal\ninput: """)
+    in_type = input("choose where date is from:\n1. file\n2. terminal\ninput: ")
     if in_type == '1':
         with open("testData.txt", "r") as f:
             s = f.read()
@@ -320,7 +322,7 @@ if __name__ == '__main__':
     elif in_type == '2':
         while True:
             try:
-                s = input('sql > ')
+                s = input('SQL > ')
             except EOFError:
                 break
             if not s:
