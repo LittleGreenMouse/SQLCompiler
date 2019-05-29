@@ -40,8 +40,8 @@ A simple SQL compiler
   python yacc.py
   ```
 - Select mode
-  - 1. Read data from testData.txt
-  - 2. Read data from terminal
+  - 1 Read data from testData.txt
+  - 2 Read data from terminal
 
 
 [1]:https://www.dabeaz.com/ply/
