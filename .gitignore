@@ -1,0 +1,9 @@
+# ignore idea files
+.idea
+
+# igmore python bytecode
+__pycache__
+
+# ignore ply files
+parser.out
+parsetab.py
